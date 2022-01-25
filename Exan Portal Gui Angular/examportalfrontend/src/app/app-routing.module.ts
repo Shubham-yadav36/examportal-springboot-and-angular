@@ -64,6 +64,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'contact',
+    component: ContactusComponent,
+    pathMatch: 'full',
+  },
+  {
     path: 'signup',
     component: SignupComponent,
     pathMatch: 'full',
@@ -152,11 +157,6 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutusComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'contact',
-    component: ContactusComponent,
     pathMatch: 'full',
   },
   {

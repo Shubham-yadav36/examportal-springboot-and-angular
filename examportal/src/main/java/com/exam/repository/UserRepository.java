@@ -11,6 +11,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     void  deleteById(Long id);
 
-    @Query(value ="SELECT * FROM Users order by fist_name",nativeQuery = true)
+    @Query(value ="SELECT * FROM users order by fist_name",nativeQuery = true)
     List<User> getAllUser();
 }

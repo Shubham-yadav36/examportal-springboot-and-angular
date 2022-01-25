@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.exam.services.imple.UserDetailsServiceImpl;
 
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,8 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			try {
 				jwtToken = requestokenHeader.substring(7);
 				username = this.jwtUtils.extractUsername(jwtToken);
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (MalformedJwtException e) {
 				System.out.println("Other Exeption !!");
 			}
 		}

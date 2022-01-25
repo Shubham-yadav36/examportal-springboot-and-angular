@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RoleDTO implements Serializable{
+public class RoleDTO implements Serializable {
     private Long role_id;
     private String role_name;
     private Set<UserRoleDTO> userRole = new HashSet<>();
@@ -32,5 +32,4 @@ public class RoleDTO implements Serializable{
     public void setUserRole(Set<UserRoleDTO> userRole) {
         this.userRole = userRole;
     }
-
 }

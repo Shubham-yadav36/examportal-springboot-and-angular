@@ -8,7 +8,7 @@
                 <div class="container text-center">
                     <div class="form-group my-3">
                         <input type="file" (change)="onChange($event)" class="mx-4 form-control-file" id="profile">
-                        <button (click)="onUpload()" mat-raised-button color="primary" type="submit">Upload</button>
+                        <button [disabled]="!file" (click)="onUpload()" mat-raised-button color="primary" type="submit">Upload</button>
                     </div>
 
                 </div>

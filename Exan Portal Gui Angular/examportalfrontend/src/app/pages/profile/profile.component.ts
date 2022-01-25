@@ -30,7 +30,6 @@ export class ProfileComponent implements OnInit {
   // OnClick of button Upload
   onUpload() {
     console.log(this.file);
-    console.log("Run")
     this.fileUploadService.upload(this.file,this.user.id).subscribe(
       (data: any) => {
         this.router.navigate(['/user/user-profile']);

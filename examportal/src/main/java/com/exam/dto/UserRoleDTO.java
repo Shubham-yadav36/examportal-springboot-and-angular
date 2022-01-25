@@ -2,7 +2,7 @@ package com.exam.dto;
 
 import java.io.Serializable;
 
-public class UserRoleDTO implements Serializable{
+public class UserRoleDTO implements Serializable {
     private Long user_role_id;
 
     private UserDTO user;
@@ -33,5 +33,4 @@ public class UserRoleDTO implements Serializable{
         this.role = role;
     }
 
-    
 }

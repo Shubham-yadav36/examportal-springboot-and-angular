@@ -3,6 +3,7 @@
     <mat-list>
         <div class="container text-center">
           <button routerLink="/admin/add-category" mat-raised-button color="accent">Add New Category</button>
+        <h2 class="mt-4" *ngIf="categories.length == 0">Category is not Available.</h2>
         </div>
         <mat-list-item *ngFor="let category of categories">
             <mat-icon mat-list-icon>

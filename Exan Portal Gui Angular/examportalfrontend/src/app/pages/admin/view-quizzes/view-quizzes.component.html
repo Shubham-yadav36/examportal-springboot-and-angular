@@ -1,6 +1,8 @@
-<div class="container text-center my-2">
-    <button routerLink="/admin/add-quiz" mat-raised-button color="accent">Add New Quiz</button>
-</div>
+<div class="container text-center my-2" >
+  <button routerLink="/admin/add-quiz" mat-raised-button color="accent">Add New Quiz</button>
+  <h2 class="mt-4" *ngIf="quizzes.length == 0">No Quiz Available.</h2>
+
+  </div>
 <mat-card class="mt-10" *ngFor="let q of quizzes">
     <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
