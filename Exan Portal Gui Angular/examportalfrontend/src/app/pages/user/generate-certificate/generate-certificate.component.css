@@ -1,0 +1,10 @@
+.certificate {
+    border: 5px solid cyan;
+    padding: 10px;
+    max-width: 686px;
+    margin: auto;
+}
+
+.title-font {
+    font-family: cursive;
+}

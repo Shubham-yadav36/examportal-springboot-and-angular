@@ -1,0 +1,35 @@
+.primary-bg {
+    background-color: #6a1b9a;
+    padding-right: 30px;
+    padding-left: 30px;
+    height: 65px;
+    font-size: 18px;
+}
+
+.navbar ul li {
+    color: antiquewhite;
+}
+
+.align {
+    justify-content: flex-end;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.ml20 {
+    margin-left: 20px;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+.nav-item {
+    cursor: pointer;
+}
+
+.fn-size {
+    cursor: pointer;
+}

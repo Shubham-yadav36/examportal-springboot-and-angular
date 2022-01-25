@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <h1 class="text-center mt-2">All Available Quizzes</h1>
+    <mat-card class="mt-2" *ngFor="let r of results">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title><strong>Result of Quiz : </strong>{{r.quiz.title}}</mat-card-title>
+            <mat-card-subtitle>
+                <div mat-line><strong>Description : </strong>{{r.quiz.description | slice:0:140}}...</div>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <div><strong>Correct Answer : </strong>{{r.correctAnswer}} Question</div>
+                </div>
+                <div class="col-md-3">
+                    <div><strong>Attempted : </strong>{{r.attempted}} Question</div>
+                </div>
+                <div class="col-md-3">
+                    <div><strong>Total Question : </strong>{{r.quiz.numberOfQuestions}} Question</div>
+                </div>
+                <div class="col-md-3">
+                    <div><strong>Marks Got : </strong>{{r.marksGot}}</div>
+                </div>
+            </div>
+            <div class="mt-2"><strong>Last Attempt Date & Time: </strong>{{r.attemptDate}}</div>
+            <div class="mt-2"><strong>Percentage : </strong>{{((r.correctAnswer/r.quiz.numberOfQuestions).toFixed(4))*100}} %</div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="container-fluid mt-4" *ngIf="results">
+    <h1 class="text-center mt-2">No Quizzes Available</h1>
+</div>

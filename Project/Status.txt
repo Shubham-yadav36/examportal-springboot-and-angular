@@ -1,0 +1,29 @@
+	Data models
+		Data Flow Diagram - all completed only DFD addition remains
+		Control Flow diagrams
+		State Diagrams
+		Entity Relationship Diagram
+		Class Diagrams
+System Design
+	Project Modules
+	Database Design
+	User Interface Design
+Test Cases
+Coding
+	Code of Project
+	Standardization of the coding
+	Validation checks
+Tools and Technology Used
+Testing
+	Testing techniques and testing strategies
+	Test reports for Unit Test Cases
+System Security measures
+	Database/data security
+	Creation of User profiles and access rights
+	Admin Profile access rights
+	Login before access resources 
+Cost Estimation 
+Reports
+Future scope and further enhancement
+Bibliography
+Appendices

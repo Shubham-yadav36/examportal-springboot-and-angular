@@ -1,0 +1,40 @@
+<div class="container mt-3">
+    <div class="row" *ngIf="user">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/signup.png" class="img-responsive" style="max-height: 100px;" alt=" ">
+                </div>
+
+                <h1 class="text-center text-bold">Update User !!</h1>
+
+                <form (ngSubmit)="formSubmit()" enctype="multipart/form-data">
+                    <!-- first name field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input required [(ngModel)]="user.fistName" name="fistName" matInput placeholder="Enter your fist name">
+                    </mat-form-field>
+
+                    <!-- last name field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input required [(ngModel)]="user.lastName" name="lastName" matInput placeholder="Enter your last name">
+                    </mat-form-field>
+
+                    <!-- phone name field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Mobile Number</mat-label>
+                        <input required [(ngModel)]="user.phone" name="phone" type="number" matInput placeholder="Enter your Mobile Number">
+                    </mat-form-field>
+
+                    <div class="container text-center">
+                        <button type="submit" mat-raised-button color="primary">Update</button>
+                        <button type="reset" mat-raised-button style="margin-left: 10px;" color="warn">Reset</button>
+                    </div>
+
+                </form>
+
+            </mat-card>
+        </div>
+        </ div>
+    </div>

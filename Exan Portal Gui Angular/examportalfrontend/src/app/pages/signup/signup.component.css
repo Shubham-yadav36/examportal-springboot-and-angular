@@ -1,0 +1,10 @@
+.full-width {
+    width: 100%;
+}
+
+
+/* validation css */
+
+input.ng-invalid.ng-touched {
+    color: red;
+}

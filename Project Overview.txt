@@ -1,0 +1,18 @@
+Exam Portal App Function For Admin User
+----------------------------------------------
+1 Add Category
+2 Add Question
+3 Add Quiz
+4 Dashboard
+5 Sidebar 
+6 Update Quiz
+7 Update Question
+8 View Categories
+9 View Quizzes
+10 Welcome
+
+Exam Portal App Function For NormalUser
+----------------------------------------------
+1 User Dashboard
+2 Sidebar
+3 Load Question

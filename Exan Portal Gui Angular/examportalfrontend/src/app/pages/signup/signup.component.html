@@ -1,0 +1,77 @@
+<div class="container mt-3">
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+
+                <div class="container text-center">
+                    <img src="../../../assets/signup.png" class="img-responsive" style="max-height: 100px;" alt=" ">
+                </div>
+                <h1 class="text-center text-bold">Register Here !!</h1>
+
+                <form [formGroup]="registerForm" (ngSubmit)="formSubmit()" autocomplete="off">
+
+                    <!-- username field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input name="username" formControlName="username" matInput placeholder="Enter your username">
+                        <mat-error *ngIf="hasError('username','pattern')">Username is not a valid pattern</mat-error>
+                        <mat-error *ngIf="hasError('username','required')">Username is required</mat-error>
+
+                    </mat-form-field>
+
+                    <!-- password field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input name="password" matInput placeholder="Enter your password" formControlName="password">
+                        <mat-error *ngIf="hasError('password','pattern')">Password is not a valid format</mat-error>
+                        <mat-error *ngIf="hasError('password','required')">Password is required</mat-error>
+                    </mat-form-field>
+
+
+                    <!-- first name field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input name="fistName" matInput formControlName="fistName" placeholder="Enter your first name" password>
+                        <mat-error *ngIf="hasError('fistName','required')">First Name is required</mat-error>
+                        <mat-error *ngIf="hasError('fistName','minlength')">First Name should not be less than 3 letters</mat-error>
+                        <mat-error *ngIf="hasError('fistName','maxlength')">First Name should not be greater than 60 letters</mat-error>
+                    </mat-form-field>
+
+                    <!-- last name field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input name="lastName" matInput placeholder="Enter your last name" formControlName="lastName">
+                        <mat-error *ngIf="hasError('lastName','required')">Last Name is required</mat-error>
+                        <mat-error *ngIf="hasError('lastName','minlength')">Last Name should not be less than 3 letters</mat-error>
+                        <mat-error *ngIf="hasError('lastName','maxlength')">Last Name should not be greater than 60 letters</mat-error>
+
+                    </mat-form-field>
+
+                    <!-- email name field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Your Email</mat-label>
+                        <input name="email" type="email" matInput email placeholder="Enter your email address" formControlName="email">
+                        <mat-error *ngIf="hasError('email','email')">Email is not in valid format</mat-error>
+                        <mat-error *ngIf="hasError('email','required')">Email is required</mat-error>
+                    </mat-form-field>
+
+                    <!-- phone name field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Mobile Number</mat-label>
+                        <input name="phone" type="number" matInput placeholder="Enter your Mobile Number" formControlName="phone">
+                        <mat-error *ngIf="hasError('phone','pattern')">Mobile Number is not in valid format</mat-error>
+                        <mat-error *ngIf="hasError('phone','required')">Mobile Number is required</mat-error>
+                    </mat-form-field>
+
+                    <div class="container text-center">
+                        <button type="submit" [disabled]="!registerForm.valid" mat-raised-button color="primary">Register</button>
+                        <button type="reset" mat-raised-button style="margin-left: 10px;" color="warn">Reset</button>
+                    </div>
+
+                </form>
+
+            </mat-card>
+        </div>
+    </div>
+</div>

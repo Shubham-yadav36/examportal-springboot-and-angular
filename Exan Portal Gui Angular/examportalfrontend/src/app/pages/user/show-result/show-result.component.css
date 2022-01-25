@@ -1,0 +1,8 @@
+.mt-10 {
+    margin-top: 10px;
+}
+
+.example-header-image {
+    background-image: url('../../../../assets/exam.png');
+    background-size: cover;
+}

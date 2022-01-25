@@ -1,0 +1,57 @@
+<mat-card>
+    <h1 class="text-center"><strong>Add New Quizzes</strong></h1>
+    <div class="container">
+        <div class="row">
+            <form [formGroup]="addQuizForm" (ngSubmit)="addQuiz()">
+                <div class="col-md-8 offset-md-2">
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Quiz Title</mat-label>
+                        <input name="title" formControlName="title" matInput placeholder="enter title" type="text" />
+                        <mat-error *ngIf="hasError('title','required')">Title is required</mat-error>
+                        <mat-error *ngIf="hasError('title','minlength')">Title length must be at least 2</mat-error>
+                        <mat-error *ngIf="hasError('title','maxlength')">Title length must not be greater than 300</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <textarea rows="5" name="description" formControlName="description" matInput placeholder="enter description" type="text"></textarea>
+                        <mat-error *ngIf="hasError('description','required')">Description is required</mat-error>
+                        <mat-error *ngIf="hasError('description','minlength')">Description length must be at least 5</mat-error>
+                        <mat-error *ngIf="hasError('description','maxlength')">Description length must not be greater than 1000</mat-error>
+                    </mat-form-field>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="width-100" appearance="outline">
+                                <mat-label>Maximum Marks</mat-label>
+                                <input name="maxMarks" formControlName="maxMarks" matInput placeholder="enter marks" type="number" />
+                                <mat-error *ngIf="hasError('maxMarks','required')">Description is required</mat-error>
+                                <mat-error *ngIf="hasError('maxMarks','min')">Marks can not be zero or negative</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="width-100" appearance="outline">
+                                <mat-label>Number Of Questions</mat-label>
+                                <input name="numberOfQuestions" formControlName="numberOfQuestions" matInput placeholder="enter number of questions" type="number" />
+                                <mat-error *ngIf="hasError('numberOfQuestions','required')">Number of questions required</mat-error>
+                                <mat-error *ngIf="hasError('numberOfQuestions','min')">Number of Questions can not be zero or negative</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <mat-slide-toggle class="example-margin mb-3" name="active" formControlName="active" color="primary" checked="false"> Publish Status</mat-slide-toggle>
+
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-select name="category" formControlName="categoryId">
+                            <mat-option *ngFor="let c of categories" [value]="c.cId">{{c.title}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="hasError('categoryId','required')">Category of questions required</mat-error>
+                    </mat-form-field>
+
+                    <div class="container text-center">
+                        <button mat-raised-button [disabled]="!addQuizForm.valid" color="accent">Add Quiz</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</mat-card>

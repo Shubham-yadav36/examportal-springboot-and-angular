@@ -1,0 +1,80 @@
+<mat-card>
+    <h1 class="text-center"><strong>Update Question</strong></h1>
+    <mat-card-content>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <form [formGroup]="updateQuestionForm" (ngSubmit)="formSubmit()">
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Question</mat-label>
+                        <textarea name="content" rows='5' formControlName="content" matInput placeholder="enter content of question" type="text"></textarea>
+                        <mat-error *ngIf="hasError('content','required')">Question Content is required</mat-error>
+                        <mat-error *ngIf="hasError('content','minlength')">Question Content must be at least 5 characters</mat-error>
+                        <mat-error *ngIf="hasError('content','maxlength')">Question Content must not be greater than 1000 characters</mat-error>
+                    </mat-form-field>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="width-100" appearance="outline">
+                                <mat-label>Option 1</mat-label>
+                                <input name="option1" formControlName="option1" matInput placeholder="enter option 1" type="text" />
+                                <mat-error *ngIf="hasError('option1','required')">Option is required</mat-error>
+                                <mat-error *ngIf="hasError('option1','minlength')">Option length must be at least 2 characters</mat-error>
+                                <mat-error *ngIf="hasError('option1','maxlength')">Option length must not be greater than 100 characters</mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="width-100" appearance="outline">
+                                <mat-label>Option 2</mat-label>
+                                <input name="option2" formControlName="option2" matInput placeholder="enter option 2" type="text" />
+                                <mat-error *ngIf="hasError('option2','required')">Option is required</mat-error>
+                                <mat-error *ngIf="hasError('option2','minlength')">Option length must be at least 2 characters</mat-error>
+                                <mat-error *ngIf="hasError('option2','maxlength')">Option length must not be greater than 100 characters</mat-error>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="width-100" appearance="outline">
+                                <mat-label>Option 3</mat-label>
+                                <input name="option3" formControlName="option3" matInput placeholder="enter option 3" type="text" />
+                                <mat-error *ngIf="hasError('option3','required')">Option is required</mat-error>
+                                <mat-error *ngIf="hasError('option3','minlength')">Option length must be at least 2 characters</mat-error>
+                                <mat-error *ngIf="hasError('option3','maxlength')">Option length must not be greater than 100 characters</mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="width-100" appearance="outline">
+                                <mat-label>Option 4</mat-label>
+                                <input name="option4" formControlName="option4" matInput placeholder="enter option 4" type="text" />
+                                <mat-error *ngIf="hasError('option4','required')">Option is required</mat-error>
+                                <mat-error *ngIf="hasError('option4','minlength')">Option length must be at least 2 characters</mat-error>
+                                <mat-error *ngIf="hasError('option4','maxlength')">Option length must not be greater than 100 characters</mat-error>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <mat-form-field class="width-100" appearance="outline">
+                                <mat-label>Select Answer</mat-label>
+                                <mat-select name="answer" formControlName="answer">
+                                    <mat-option *ngIf="updateQuestionForm.get('option1').value" [value]="updateQuestionForm.get('option1').value">{{updateQuestionForm.get('option1').value}}</mat-option>
+                                    <mat-option *ngIf="updateQuestionForm.get('option2').value" [value]="updateQuestionForm.get('option2').value">{{updateQuestionForm.get('option2').value}}</mat-option>
+                                    <mat-option *ngIf="updateQuestionForm.get('option3').value" [value]="updateQuestionForm.get('option3').value">{{updateQuestionForm.get('option3').value}}</mat-option>
+                                    <mat-option *ngIf="updateQuestionForm.get('option4').value" [value]="updateQuestionForm.get('option4').value">{{updateQuestionForm.get('option4').value}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="hasError('answer','required')">Answer is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="container text-center">
+                        <button mat-raised-button [disabled]="!updateQuestionForm.valid" color="accent">Update Question</button>
+                        <button class="mx-2" (click)="gotoAllQuestions()" mat-raised-button color="accent">Back</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

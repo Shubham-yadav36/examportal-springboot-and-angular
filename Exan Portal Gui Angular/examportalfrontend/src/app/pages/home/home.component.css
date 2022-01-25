@@ -1,0 +1,13 @@
+.mt20 {
+    margin-top: 20px;
+}
+
+.fix-padding {
+    padding: 0px;
+}
+
+.text-decoration {
+    font-family: cursive;
+    font-size: 2rem;
+    color: dimgrey;
+}

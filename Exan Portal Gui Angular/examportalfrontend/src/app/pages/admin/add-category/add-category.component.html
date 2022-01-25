@@ -1,0 +1,30 @@
+<mat-card>
+    <hr>
+    <h1 class="text-center"><strong>Add New Category</strong></h1>
+    <hr>
+    <mat-card-content>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form (ngSubmit)='formSubmit()' [formGroup]="addCategoryForm">
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Category Title</mat-label>
+                        <input formControlName="title" name="title" matInput placeholder="enter title" type="text" />
+                        <mat-error *ngIf="hasError('title','required')">Title is required</mat-error>
+                        <mat-error *ngIf="hasError('title','minlength')">Title must be at least 3 characters</mat-error>
+                        <mat-error *ngIf="hasError('title','maxlength')">Title must not be greater than 300 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName="description" class="description" name="description" matInput placeholder="enter description"></textarea>
+                        <mat-error *ngIf="hasError('description','required')">Description is required</mat-error>
+                        <mat-error *ngIf="hasError('description','minlength')">Description must be at least 5 characters</mat-error>
+                        <mat-error *ngIf="hasError('description','maxlength')">Description must not be greater than 1000 characters</mat-error>
+                    </mat-form-field>
+                    <div class="container text-center">
+                        <button mat-raised-button color="accent" [disabled]="!addCategoryForm.valid">Add Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

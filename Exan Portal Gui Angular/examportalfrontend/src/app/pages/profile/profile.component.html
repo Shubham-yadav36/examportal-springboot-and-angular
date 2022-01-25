@@ -1,0 +1,54 @@
+<mat-card *ngIf="user">
+    <mat-card-content>
+
+        <div class="container">
+            <h1><strong>Your Profile Details</strong></h1>
+            <div class="container text-center">
+                <img src="../assets/profile/{{user.profile}}" class="profile-image">
+                <div class="container text-center">
+                    <div class="form-group my-3">
+                        <input type="file" (change)="onChange($event)" class="mx-4 form-control-file" id="profile">
+                        <button (click)="onUpload()" mat-raised-button color="primary" type="submit">Upload</button>
+                    </div>
+
+                </div>
+                <h1 class="mt-2"><strong>{{user.fistName}} {{user.lastName}}</strong></h1>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-md-10 offset-md-1">
+                    <table class="table-custom">
+                        <tbody>
+                            <tr>
+                                <td>Username</td>
+                                <td>{{user.username}}</td>
+                            </tr>
+                            <tr>
+                                <td>UserId</td>
+                                <td>{{user.id}}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td>
+                                <td>{{user.phone}}</td>
+                            </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td>{{user.authorities[0].authority}}</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>{{user.enabled?'ACTIVE':"NOTACTIVE "}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="text-center">
+        <button mat-raised-button color='primary' [routerLink]="'/updateProfile/'+user.username">Update</button>
+        <button mat-raised-button color='accent' routerLink="/">Home</button>
+
+    </mat-card-actions>
+</mat-card>

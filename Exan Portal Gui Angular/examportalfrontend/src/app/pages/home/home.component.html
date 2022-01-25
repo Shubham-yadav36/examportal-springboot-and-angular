@@ -1,0 +1,134 @@
+<!-- if user is logged in -->
+<div class="container-fluid" *ngIf="user">
+    <div class="row">
+        <div class="col-md-2">
+            <mat-card>
+                <mat-action-list>
+                    <div mat-subheader>
+                        <strong>Available Option</strong>
+                    </div>
+
+                    <button mat-list-item routerLink="/">
+                      <mat-icon mat-list-icon >home</mat-icon> Home
+                    </button>
+
+                    <button routerLink="/user-dashboard/0" mat-list-item>
+                      <mat-icon mat-list-icon>dashboard</mat-icon> Dashboard
+                    </button>
+
+                    <button [routerLink]="'/user/attepted-test/'+user.id" mat-list-item>
+                      <mat-icon  mat-list-icon>published_with_changes</mat-icon>Attempted
+                        Quiz
+                    </button>
+
+                    <button routerLink="/user-dashboard/0" mat-list-item>
+                      <mat-icon mat-list-icon>quiz</mat-icon>Quizzes
+                    </button>
+
+                    <button (click)="logout()" mat-list-item>
+                      <mat-icon mat-list-icon>logout</mat-icon>Logout
+                    </button>
+                </mat-action-list>
+            </mat-card>
+        </div>
+        <div class="col-md-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<!-- if user is not logged in -->
+<div class="container-fluid fix-padding" *ngIf="!user">
+    <div class="jumbotron mb-4" style="background: aquamarine;
+    padding: 51px;">
+        <div class="container">
+            <div class="row" style="    height: 196px;
+            margin-top: -37px;">
+                <div class="col-md-6" style="margin-top: 25px;">
+                    <h1 class="text-decoration">Exam Portal App</h1>
+                    <p style="font-family: system-ui;
+                    color: darkblue;">Prepare for Interview/Exams Hand-curated Tests/Quizes, to help you polish your skills.</p>
+
+                    <p style="font-style: oblique;
+                    color: green;font-weight: bold;">Whether you need to improve your own selection process with candidates you would not otherwise reach, or you want to completely replace your admission, ScioLink will allow you to do so.</p>
+
+                    <button type="button" routerLink="signup" class="btn btn-outline-success">Start Improve Your Skills,! Register Yourself</button>
+                </div>
+                <div class="col-md-6  text-center">
+                    <img style="height: 255px;" class="img-responsive" src="../../../assets/test-exam.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container marketing text-center">
+        <h1 class="text-muted"><b>Why Use Exam Portal ?</b></h1>
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../../../assets/category-wise.png" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+
+                <h2>Topic Wise Arrangement</h2>
+                <p>All Quiz arranged based on Topics so that you can easily search and give quiz of your choice of Topic.</p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../../../assets/result.png" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+
+                <h2>Result Facility</h2>
+                <p>All Given Quiz Results will be avalble in Exam Portal so you can access result after completion of the exam.</p>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="../../../assets/result.png" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+
+                <h2>Certificate</h2>
+                <p>After Completion of the exam you will get the certificate so you can use it in your resume or to show your performance.</p>
+            </div>
+
+
+
+            <!-- START THE FEATURETTES -->
+            <div class="row mt-3">
+
+
+                <hr class="featurette-divider">
+
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2">
+                        <h2 class="featurette-heading">Plenty of test takers
+                            <span class="text-muted">Smooth concurrent exams.</span></h2>
+                        <p class="lead">Organizing campus drives in colleges and aptitude tests in the entrance levels is now made comfortable with very large number of exam takers. Go ahead and plan a giant amount of test series on the online test platform with large
+                            number of concurrent candidates.</p>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="../../../../assets/large-number-online-exam.png" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice"
+                            focusable="false">
+
+                    </div>
+                </div>
+                <hr class="featurette-divider">
+
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Test maker software
+
+                            <span class="text-muted">Practice made perfect.</span></h2>
+                        <p class="lead">SpeedExam is an unique online test platform offering Test Maker Software - A tool for self-study. Test Maker Software enables learners to create tests on different parameters assisting self-study. Learners can select tutor or test
+                            mode also can create tests choosing different difficulty level, number of questions, sections. The candidate can create a test from a huge question bank specifying Unused, Incorrect, and Flagged questions.</p>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="../../../../assets/test-prep-software.png" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice"
+                            focusable="false">
+
+                    </div>
+                </div>
+
+
+
+                <!-- /END THE FEATURETTES -->
+
+            </div>

@@ -1,0 +1,37 @@
+<div class="container mt-3">
+
+    <div class="row">
+        <div class="col-md-5 offset-md-4">
+            <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/login.png" class="img-responsive" style="max-height: 100px;" alt=" ">
+                </div>
+                <h1 style="font-size: revert;margin-top:15px" class="text-center text-bold">Login Here !!</h1>
+                <form (ngSubmit)="formSubmit()" [formGroup]="loginForm">
+
+                    <!-- username field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input formControlName="username" [(ngModel)]="loginData.username" name="username" matInput placeholder="Enter your username">
+                        <mat-hint *ngIf="loginForm.get('username').invalid && loginForm.get('username').touched">Username is Required</mat-hint>
+                    </mat-form-field>
+
+                    <!-- password field -->
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input formControlName="password" type="password" [(ngModel)]="loginData.password" name="password" matInput placeholder="Enter your password">
+                        <mat-hint *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">Password is Required</mat-hint>
+                    </mat-form-field>
+
+
+                    <div class="container text-center">
+                        <button type="submit" [disabled]="loginForm.invalid" mat-raised-button color="primary">Login</button>
+                        <button type="reset" mat-raised-button style="margin-left: 10px;" color="warn">Reset</button>
+                    </div>
+
+                </form>
+
+            </mat-card>
+        </div>
+    </div>
+</div>

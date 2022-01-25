@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container mt-2 text-center">
+        <div class="certificate" *ngIf="result">
+            <img src="../../../../assets/medal.png" style=" max-height: 195px;
+                      max-width: 195px;" alt="">
+            <h1 class="title-font">Certificate</h1>
+            <h2 class="text-muted">This Certificate is awarded to Mr./Mrs. <b>{{result.user.fistName +" " + result.user.lastName}}</b>.</h2>
+            <h4 class="text-muted">For Successfully completing the Quiz <b>{{result.quiz.title}}</b> of <b>{{result.quiz.category.title}}</b> on <b>{{result.attemptDate}}</b> with score <b>{{((result.correctAnswer/result.quiz.numberOfQuestions).toFixed(4))*100}} %</b>.</h4>
+            <h4 class="text-center mt-5 text-muted"><b>Certificate By Exam Portal</b></h4>
+        </div>
+        <div class="container text-center">
+            <button class="mt-3" mat-raised-button color="accent" (click)="print()">Print</button>
+            <button class="mx-3" [routerLink]="'/user/attepted-test/'+result.user.id" mat-raised-button color="accent">Home</button>
+        </div>
+    </div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

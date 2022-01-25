@@ -1,0 +1,49 @@
+<h1 class="mt-2"><strong>All Available Quizzes</strong></h1>
+<div class="search-container">
+    <input (keyup)="search($event)" type="text" class="form-control" placeholder="Search Quiz">
+    <div class="serach-result" *ngIf="searchedQzuizzes != null">
+        <!-- serach result is here -->
+        <mat-card class="mt-2 cursor" *ngFor="let q of searchedQzuizzes" [routerLink]="'/user-dashboard/instruction/'+ q.qId">
+            {{q.title}}
+        </mat-card>
+        <mat-card *ngIf="searchedQzuizzes.length == 0">
+            No Quiz Available
+        </mat-card>
+    </div>
+</div>
+<div class="row" *ngIf="quizzies">
+    <div class="col-md-4" *ngFor="let q of quizzies">
+        <mat-card class="mt-2">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{ q.title }}</mat-card-title>
+                <mat-card-subtitle>{{ q.category.title }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="truncate">{{ q.description }}</p>
+            </mat-card-content>
+            <mat-card-action>
+                <button mat-raised-button class="mr2" [routerLink]="'/user-dashboard/instruction/' + q.qId" color="accent">Start</button>
+                <button mat-raised-button class="mr2" color="primary">View</button>
+                <button mat-stroked-button class="mr2" color="warn">M.M.{{q.maxMarks}}</button>
+                <button mat-stroked-button class="mr2" color="accent">Ques.{{q.numberOfQuestions}}</button>
+            </mat-card-action>
+        </mat-card>
+    </div>
+    <div class="container mt-2" *ngIf="totalPagesSize != 0">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item" *ngIf="currentPage!=1" (click)="pagination(currentPage-1)"><a class="page-link">Previous</a></li>
+
+                <li class="page-item" *ngFor="let in of counter(totalPagesSize) ;let i = index" [ngClass]="[ currentPage==i+1 ? 'active':'']" (click)="pagination(i+1)"><a class="page-link">{{i+1}}</a></li>
+
+                <li class="page-item" *ngIf="totalPagesSize!=currentPage" (click)="pagination(currentPage+1)"><a class="page-link">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="row" *ngIf="quizzies.length == 0">
+    <div class="col-md-12 text-center">
+        <h1>No Quiz Available</h1>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<section class="flex flex-column flex-grow-1">
+    <div class="container text-center">
+        <h1 class="contact-text">Contact Us</h1>
+        <img style="margin-top:30px" src="../../../../assets/contactus.png" class=" lazyloaded" alt="contact-us">
+        <h2 class="main-text">Exam Portal Pvt. Ltd.</h2>
+        <p class="desc">We would love you hear from you. Let us know if you are facing any challenges, have any questions or want to share feedback. We are always happy to help!</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 mt-5 text-center">
+                <h2><b>Contact Us !!</b></h2>
+                <form (ngSubmit)="submitform()">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Enter Your Name</mat-label>
+                        <input name="name" [(ngModel)]="contactus.name" matInput placeholder="name here">
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput name="email" [(ngModel)]="contactus.email" placeholder="email here">
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Mesage</mat-label>
+                        <textarea class="description" name="message" [(ngModel)]="contactus.description" matInput placeholder="enter message"></textarea>
+                    </mat-form-field><br>
+                    <button type="submit" mat-raised-button color="warn">
+                      Send <mat-icon>send</mat-icon>
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-6 mt-5 ">
+                <img src="../../../../assets/map.PNG " alt=" ">
+            </div>
+        </div>
+
+    </div>
+
+</section>

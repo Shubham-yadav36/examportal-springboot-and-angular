@@ -1,0 +1,33 @@
+<h1 class="text-center my-2"><strong>Your Attempted Quizzes</strong></h1>
+<h3 class="text-center my-2" *ngIf="results.length == 0">You Did Not Have any attempted quiz</h3>
+<mat-card class="mt-10" *ngFor="let r of results">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title><strong>Result of Quiz : </strong>{{r.quiz.title}}</mat-card-title>
+        <mat-card-subtitle>
+            <div mat-line><strong>Description : </strong>{{r.quiz.description | slice:0:140}}...</div>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div><strong>Correct Answer : </strong>{{r.correctAnswer}} Question</div>
+            </div>
+            <div class="col-md-3">
+                <div><strong>Attempted : </strong>{{r.attempted}} Question</div>
+            </div>
+            <div class="col-md-3">
+                <div><strong>Total Question : </strong>{{r.quiz.numberOfQuestions}} Question</div>
+            </div>
+            <div class="col-md-3">
+                <div><strong>Marks Got : </strong>{{r.marksGot}}</div>
+            </div>
+        </div>
+        <div class="mt-2"><strong>Last Attempt Date & Time: </strong>{{r.attemptDate}}</div>
+        <div class="mt-2"><strong>Percentage : </strong>{{((r.correctAnswer/r.quiz.numberOfQuestions).toFixed(4))*100}} %</div>
+    </mat-card-content>
+    <mat-card-actions class="text-center">
+        <button (click)="generateResult(r.rId)" mat-raised-button color="accent">Get Certificate</button>
+        <button mat-raised-button [routerLink]="'/user-dashboard/instruction/'+r.quiz.qId" color="primary">Re-Attempt</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,21 @@
+.blue {
+    background-color: #6a1b9a;
+}
+
+.footer-copyright {
+    background-color: darkblue;
+}
+
+.img-res {
+    height: 23px;
+}
+
+.ml3 {
+    margin-left: 15px;
+}
+
+.links ul a {
+    text-decoration: none;
+    margin-bottom: 3px;
+    color: khaki;
+}

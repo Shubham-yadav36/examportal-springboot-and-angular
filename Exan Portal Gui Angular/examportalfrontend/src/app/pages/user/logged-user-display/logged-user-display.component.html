@@ -1,0 +1,77 @@
+<h2 class="text-muted">
+    <strong *ngIf="dQuiz.length!=0">Upcomming Quiz ...</strong></h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4" *ngFor="let q of dQuiz">
+
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src=".././../../../assets/card.png" style="width: 210px; height:190px" alt="Avatar">
+                            </div>
+                            <div class="flip-card-back">
+                                <h2><b>Quiz: </b>{{q.title}}</h2>
+                                <p><b>Category : </b>{{q.category.title}}</p>
+                                <p><b>Updated Soon ...</b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 3 card ke niche ka content  -->
+            <div class="row mt-3">
+                <hr class="featurette-divider">
+
+
+
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading">Why Exam Portal ?
+                            <span class="text-muted">Threre is some reason for choosing..</span></h2>
+                        <p class="lead">There are lots of reasons you want to use an online exam system, but the main reason is the overwhelming advantages you get form using such an online exam system instead of the good old fashioned paper exam.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="../../../../assets/online-exam-monitoring.png" width="500" height="600" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                    </div>
+                </div>
+
+                <hr class="featurette-divider">
+
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2">
+                        <h2 class="featurette-heading">Plenty of test takers
+                            <span class="text-muted">Smooth concurrent exams.</span></h2>
+                        <p class="lead">Organizing campus drives in colleges and aptitude tests in the entrance levels is now made comfortable with very large number of exam takers. Go ahead and plan a giant amount of test series on the online test platform with large
+                            number of concurrent candidates.</p>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="../../../../assets/large-number-online-exam.png" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice"
+                            focusable="false">
+
+                    </div>
+                </div>
+                <!-- /END THE FEATURETTES -->
+            </div>
+        </div>
+        <div class="col-md-3">
+            <mat-card>
+                <mat-card-header>
+                    <h2>Important News</h2>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        <b>Welcome to the Exam Portal Application.</b> Here you can find all technology,business,Management quizzes.
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

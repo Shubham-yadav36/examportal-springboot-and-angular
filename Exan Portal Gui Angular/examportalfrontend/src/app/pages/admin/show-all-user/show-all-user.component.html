@@ -1,0 +1,14 @@
+<!-- Cards with media area -->
+<mat-card class="example-card mt-2" *ngFor="let user of allUser">
+    <mat-card-title-group>
+        <mat-card-title>Name : {{user.fistName + user.lastName}}</mat-card-title>
+        <mat-card-subtitle>User Id :{{user.id}} : Role :{{user.authorities[0].authority}}</mat-card-subtitle>
+        <img mat-card-sm-image style="    border-radius: 74%;" src="../../../../assets/profile/{{user.profile}}">
+    </mat-card-title-group>
+    <mat-card-content>
+        <p>Username: {{user.username}}</p>
+        <p>Phone: {{user.phone}}</p>
+        <button [routerLink]="'/admin/all-quiz-of-user/'+ user.id" mat-raised-button color="primary">All Attempted Quizzes of User</button>
+        <!-- <button (click)="deleteUser(user.id)" class="mx-2" mat-flat-button color="warn">Delete User</button> -->
+    </mat-card-content>
+</mat-card>
