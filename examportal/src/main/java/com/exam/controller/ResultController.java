@@ -1,5 +1,6 @@
 package com.exam.controller;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -32,13 +33,15 @@ public class ResultController {
     @Autowired
     private ResultService resultService;
 
-    @PostMapping("/")
-    public ResponseEntity<?> saveResult(@RequestBody ResultDTO resultDTO) {
-
+    @PostMapping("/{qId}")
+    public ResponseEntity<?> saveResult(Principal principal, @RequestBody ResultDTO resultDTO, @PathVariable("qId") Long qId) {
         try {
+            resultDTO.getUser().setUsername(principal.getName());
+            resultDTO.getQuiz().setqId(qId);
             ResultDTO result = this.resultService.addResult(resultDTO);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

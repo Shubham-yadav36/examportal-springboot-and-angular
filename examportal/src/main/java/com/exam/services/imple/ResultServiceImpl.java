@@ -39,7 +39,7 @@ public class ResultServiceImpl implements ResultService {
     public ResultDTO addResult(ResultDTO resultDTO) {
         resultDTO.setAttemptDate(new Date().toString());
         Quiz quiz = this.quizRepository.findById(resultDTO.getQuiz().getqId()).get();
-        User user = this.userRepository.findById(resultDTO.getUser().getId()).get();
+        User user = this.userRepository.findByUsername(resultDTO.getUser().getUsername());;
         Result resultD = getResultByUserAndQuiz(user, quiz);
         if (resultD != null) {
             resultDTO.setrId(resultD.getrId());
@@ -50,7 +50,7 @@ public class ResultServiceImpl implements ResultService {
         resultDTO.setUser(mapper.map(user, UserDTO.class));
         resultDTO.setQuiz(mapper.map(quiz, QuizDTO.class));
         Result forSave = mapper.map(resultDTO, Result.class);
-        Result saved = this.resultRepository.save(forSave);
+        Result saved = this.resultRepository.saveAndFlush(forSave);
         return mapper.map(saved, ResultDTO.class);
     }
 

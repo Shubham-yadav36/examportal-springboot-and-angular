@@ -20,10 +20,10 @@ public class Result {
     private Double marksGot;
     private String attemptDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user = new User();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Quiz quiz = new Quiz();
 
     public Long getrId() {
