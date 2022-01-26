@@ -69,4 +69,16 @@ public class ResultDTO implements Serializable {
         this.quiz = quiz;
     }
 
+    @Override
+    public String toString() {
+        return "ResultDTO{" +
+                "rId=" + rId +
+                ", correctAnswer=" + correctAnswer +
+                ", attempted=" + attempted +
+                ", marksGot=" + marksGot +
+                ", attemptDate='" + attemptDate + '\'' +
+                ", user=" + user.getUsername() +
+                ", quiz=" + quiz.getqId() +
+                '}';
+    }
 }

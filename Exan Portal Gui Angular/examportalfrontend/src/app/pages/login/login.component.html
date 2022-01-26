@@ -12,15 +12,19 @@
                     <!-- username field -->
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Username</mat-label>
-                        <input formControlName="username" [(ngModel)]="loginData.username" name="username" matInput placeholder="Enter your username">
-                        <mat-hint *ngIf="loginForm.get('username').invalid && loginForm.get('username').touched">Username is Required</mat-hint>
+                        <input formControlName="username" name="username" matInput placeholder="Enter your username">
+                        <mat-error *ngIf="hasError('username','required')">Username is required</mat-error>
+                        <mat-error *ngIf="hasError('username','minlength')">Username should not be less than 3 letters</mat-error>
+                        <mat-error *ngIf="hasError('username','maxlength')">Username should not be greater than 150 letters</mat-error>
                     </mat-form-field>
 
                     <!-- password field -->
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Password</mat-label>
-                        <input formControlName="password" type="password" [(ngModel)]="loginData.password" name="password" matInput placeholder="Enter your password">
-                        <mat-hint *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">Password is Required</mat-hint>
+                        <input formControlName="password" type="password" name="password" matInput placeholder="Enter your password">
+                        <mat-error *ngIf="hasError('password','required')">Password is required</mat-error>
+                        <mat-error *ngIf="hasError('password','minlength')">Password should not be less than 4 letters</mat-error>
+                        <mat-error *ngIf="hasError('password','maxlength')">Password should not be greater than 150 letters</mat-error>
                     </mat-form-field>
 
 

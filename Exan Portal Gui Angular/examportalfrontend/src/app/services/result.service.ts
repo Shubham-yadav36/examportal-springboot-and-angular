@@ -9,8 +9,8 @@ export class ResultService {
 
   constructor(private http:HttpClient) { }
 
-  public addResult(result){
-    return this.http.post(`${baseUrl}/result/`, result)
+  public addResult(result,qId){
+    return this.http.post(`${baseUrl}/result/${qId}`, result)
   }
 
   public getResult(resultId){

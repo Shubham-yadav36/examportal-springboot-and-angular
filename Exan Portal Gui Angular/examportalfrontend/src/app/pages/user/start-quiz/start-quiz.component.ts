@@ -14,7 +14,7 @@ import { ResultService } from 'src/app/services/result.service';
 export class StartQuizComponent implements OnInit {
 
   qId;
-  questions=[];
+  questions = [];
 
   // for declate result
   marksGot;
@@ -28,26 +28,26 @@ export class StartQuizComponent implements OnInit {
 
   // result related variables
   result = {
-     correctAnswer:0,
-     attempted:0,
-     marksGot:0,
-     percentage:0,
-     attemptDate:new Date(),
-     user:{
-        id:0
-     },
-     quiz:{
-       qId:0
-     }
+    correctAnswer: 0,
+    attempted: 0,
+    marksGot: 0,
+    percentage: 0,
+    attemptDate: '',
+    user: {
+      id: 0
+    },
+    quiz: {
+      qId: 0
+    }
   };
   resultId;
 
   constructor(private locationStrategy: LocationStrategy,
-    private activatedRoute:ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
-    private loginservice:LoginService,
-    private resutlService:ResultService,
-    private router:Router) { }
+    private loginservice: LoginService,
+    private resutlService: ResultService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.preventBackButtonClick();
@@ -56,24 +56,24 @@ export class StartQuizComponent implements OnInit {
   }
 
   loadQuestion() {
-   this.questionService.getQuestionOfQuiz(this.qId).subscribe(
-     (data: any) => {
-       this.questions = data;
-       this.timer = this.questions.length * 2 * 60;
-       this.startTimer();
-     },
-     (error)=>{ Swal.fire('Error!!',"Error When loading Questions",'error')}
-   );
+    this.questionService.getQuestionOfQuiz(this.qId).subscribe(
+      (data: any) => {
+        this.questions = data;
+        this.timer = this.questions.length * 2 * 60;
+        this.startTimer();
+      },
+      (error) => { Swal.fire('Error!!', "Error When loading Questions", 'error') }
+    );
   }
 
   preventBackButtonClick() {
-    history.pushState(null,null,location.href);
+    history.pushState(null, null, location.href);
     this.locationStrategy.onPopState(() => {
-      history.pushState(null,null,location.href);
+      history.pushState(null, null, location.href);
     });
   }
 
-  submitQuiz(){
+  submitQuiz() {
     Swal.fire({
       title: 'Are you sure?',
       text: "Do you want to submit this quiz!",
@@ -83,27 +83,27 @@ export class StartQuizComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Submit'
     }).then((result) => {
-      if (result.isConfirmed){
+      if (result.isConfirmed) {
         this.evalResult();
       }
     });
   }
 
   startTimer() {
-    let t = window.setInterval(() =>{
-      if(this.timer <= 0) {
+    let t = window.setInterval(() => {
+      if (this.timer <= 0) {
         this.evalResult();
         clearInterval(t);
-      }else{
+      } else {
         this.timer--;
       }
-    },1000);
+    }, 1000);
   }
 
   evalResult() {
     this.questionService.evaluateResult(this.questions).subscribe(
-      (data:any) => {
-         // call result api to store result
+      (data: any) => {
+        // call result api to store result
         this.isSubmitted = true;
         this.attempted = data.attempted;
         this.correctAnswer = data.correctAnswer;
@@ -111,35 +111,35 @@ export class StartQuizComponent implements OnInit {
 
         // to store result
         this.loginservice.getCurrentUser().subscribe(
-          (data: any)=>{
+          (data: any) => {
             this.result.user.id = data.id,
-            this.result.quiz.qId = this.qId,
-            this.result.attempted = this.attempted,
-            this.result.correctAnswer = this.correctAnswer,
-            this.result.marksGot = this.marksGot
+              this.result.quiz.qId = this.qId,
+              this.result.attempted = this.attempted,
+              this.result.correctAnswer = this.correctAnswer,
+              this.result.marksGot = this.marksGot
             // call api to sore result
-            this.resutlService.addResult(this.result).subscribe(
-              (data: any) =>{
+            this.resutlService.addResult(this.result, this.qId).subscribe(
+              (data: any) => {
                 this.resultId = data.rId;
               },
-              (err: any) =>{console.log(err)}
+              (err: any) => { Swal.fire("Error !!", 'Error While Saving Result !!', 'error'); }
             )
           }
         )
 
       },
-      (err) => {console.log(err)}
+      (err) => { Swal.fire("Error !!", 'Error While Evaluating Result !!', 'error'); }
     );
   }
 
-  getFormttedTime(){
+  getFormttedTime() {
     let mm = Math.floor(this.timer / 60);
     let ss = this.timer - mm * 60;
     return `${mm} min : ${ss} sec`;
   }
 
-  generateResult(){
-    this.router.navigate(['/generate-certificate/'+this.resultId]);
+  generateResult() {
+    this.router.navigate(['/generate-certificate/' + this.resultId]);
   }
 
 }

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/services/login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -11,27 +12,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loginData = {
-    username: '',
-    password: '',
-  };
 
   constructor(
     private router: Router,
     private snack: MatSnackBar,
     private login: LoginService
-  ) {}
+  ) { }
   ngOnInit(): void {
     // for validating fields in this.login
     this.loginForm = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
+      username: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
     });
   }
-
+  public hasError = (controlName: string, errorName: string) => {
+    return this.loginForm.controls[controlName].hasError(errorName);
+  };
   formSubmit() {
     // call the api to get token
-    this.login.generateToken(this.loginData).subscribe(
+    this.login.generateToken(this.loginForm.value).subscribe(
       (data: any) => {
         // this.login.....
         this.login.loginUser(data.token);
@@ -45,7 +44,6 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['admin']);
               this.login.LoginStatusSubject.next(true);
             } else if (this.login.getUserRole() == 'ROLE_USER') {
-              // user dashboard
               this.router.navigate(['/']);
               this.login.LoginStatusSubject.next(true);
             } else {
@@ -54,16 +52,16 @@ export class LoginComponent implements OnInit {
             }
           },
           (error) => {
-            this.snack.open('Bad Credential Try Again !!', '', {
-              duration: 3000,
+            this.snack.open('Bad Credential Try Again !!', 'Close', {
+              duration: 2000,
+              verticalPosition: 'top',
             });
+
           }
         );
       },
       (error) => {
-        this.snack.open('Bad Credential Try Again !!', '', {
-          duration: 3000,
-        });
+        Swal.fire("Error !!", 'Bad Credential Try Again with Correct One !!', 'error');
       }
     );
   }

@@ -10,6 +10,7 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -90,10 +91,7 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       (error) => {
-        this.snack.open('Username Already Exists !!', 'Close', {
-          duration: 2000,
-          verticalPosition: 'top',
-        });
+        Swal.fire("Error !!", 'Username Already Exists !!', 'error');
       }
     );
   }

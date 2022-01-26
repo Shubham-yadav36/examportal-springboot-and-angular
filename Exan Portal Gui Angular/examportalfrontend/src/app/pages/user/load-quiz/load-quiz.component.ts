@@ -66,13 +66,11 @@ export class LoadQuizComponent implements OnInit {
 
   // paginations
   pagination(page) {
-    console.log(page);
     if (this.catId == 0) {
       this.quizService.getAllActiveQuizzesForPagination(page).subscribe(
         (data: any) => {
           this.currentPage = data[1];
           this.quizzies= data[0];
-          console.log(data[0]);
         },
         (err) => {
           Swal.fire('Error !!', 'Error When loading Quizzes', 'error');

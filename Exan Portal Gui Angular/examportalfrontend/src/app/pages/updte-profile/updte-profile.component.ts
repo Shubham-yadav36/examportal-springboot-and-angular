@@ -16,7 +16,7 @@ export class UpdteProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.username = this.activatedRoute.snapshot.params.userId;
@@ -34,7 +34,11 @@ export class UpdteProfileComponent implements OnInit {
         Swal.fire('Updated !!', 'Updated Successfully !!', 'success').then(
           (result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['/admin/profile/']);
+              if (this.user.id == 1) {
+                this.router.navigate(['/admin/profile/']);
+              } else {
+                this.router.navigate(['/user/user-profile']);
+              }
             }
           }
         );

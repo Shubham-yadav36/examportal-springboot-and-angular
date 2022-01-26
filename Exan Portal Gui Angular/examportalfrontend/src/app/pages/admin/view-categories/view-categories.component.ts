@@ -17,11 +17,10 @@ export class ViewCategoriesComponent implements OnInit {
     this.categoryService.getCategories().subscribe(
       (data:any) =>{
         this.categories = data;
-        console.log(data);
       },
       (err) =>{
         Swal.fire("Error !!","Error When loading !",'error');
-        console.log(err);
+
       }
     );
   }
