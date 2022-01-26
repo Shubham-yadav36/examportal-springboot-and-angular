@@ -112,5 +112,4 @@ public class UserDTO implements Serializable {
         return authorities;
     }
 
-
 }

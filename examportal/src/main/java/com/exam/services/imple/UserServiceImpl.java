@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -59,8 +60,8 @@ public class UserServiceImpl implements UserService {
             role.setRole_id(60L);
             role.setRole_name("ROLE_USER");
 
-            // role.setRole_id(50L);
-            // role.setRole_name("ADMIN");
+//             role.setRole_id(50L);
+//             role.setRole_name("ADMIN");
             User user = mapper.map(userDTO, User.class);
             UserRole userRole = new UserRole();
             userRole.setUser(user);
@@ -118,7 +119,7 @@ public class UserServiceImpl implements UserService {
             if (!file.isEmpty()) {
                 if (file.getContentType().equals("image/jpeg")) {
                     Path root = Paths.get(
-                            "E:/My-Learning/Personal-Project/JAVA/Exam Portal/Exan Portal Gui Angular/examportalfrontend/src/assets/profile"
+                            "/home/lt-251/Documents/Personal/Github/examportal-springboot-and-angular/Exan Portal Gui Angular/examportalfrontend/src/assets/profile"
                                     + File.separator + file.getOriginalFilename());
                     Files.copy(file.getInputStream(), root, StandardCopyOption.REPLACE_EXISTING);
 

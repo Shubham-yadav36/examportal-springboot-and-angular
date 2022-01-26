@@ -21,33 +21,33 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MyConfiguration extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
-    
+
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public ModelMapper modelMapper() {
-    	return new ModelMapper();
+        return new ModelMapper();
     }
-    
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
-    	return super.authenticationManagerBean();
+        return super.authenticationManagerBean();
     }
 
-    @Override 
+    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(this.userDetailsServiceImpl).passwordEncoder(passwordEncoder());
 
@@ -55,24 +55,26 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-            http
+        http
                 .csrf()
                 .disable()
                 .cors()
                 .disable()
+
                 .authorizeRequests()
-                .antMatchers("/generate-token","/user/").permitAll()
+                .antMatchers("/contactus/**").permitAll()
+                .antMatchers("/generate-token", "/user/").permitAll()
+
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
-                .antMatchers("/contactus/").permitAll()
                 .anyRequest().authenticated()
                 .and()
-               .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
-               .and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
-           http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-            
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
 
     }
 
