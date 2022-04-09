@@ -13,16 +13,29 @@ export class ShowQuizzesOfUserComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,private resultService:ResultService) { }
   results;
   userId;
+  currentPage = 0;
+  totalPagesSize = 0;
+  size = 2;
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.params.userId;
-    this.resultService.getResultByUser(this.userId).subscribe(
+    this.getResultOfUserById(this.userId,this.currentPage,this.size);
+  }
+
+  getResultOfUserById(userId,page,size){
+    this.resultService.getResultByUser(userId,page,size).subscribe(
       (data:any) =>{
-        this.results = data;
+        this.results = data.data;
+        this.currentPage = data.currentPage;
+        this.totalPagesSize= data.totalPage
       },
       (err:any) =>{
         Swal.fire("Error !!","Error While Loading Results",'error')
       }
     );
+  }
+  // to get number to object
+  counter(i: number) {
+    return new Array(i);
   }
 
 }

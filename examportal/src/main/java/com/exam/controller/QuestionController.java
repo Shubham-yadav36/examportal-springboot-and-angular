@@ -14,6 +14,7 @@ import com.exam.services.QuestionService;
 import com.exam.services.QuizService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -95,9 +96,9 @@ public class QuestionController {
 
     // to get all question of quiz for admin
     @GetMapping("/quiz/all/{qId}")
-    public ResponseEntity<?> getQuestionsOfQuizAdmin(@PathVariable("qId") Long qId) {
+    public ResponseEntity<?> getQuestionsOfQuizAdmin(@PathVariable("qId") Long qId,Pageable pageable) {
         try {
-            return new ResponseEntity<>(this.questionService.getQuestionsOfQuiz(qId), HttpStatus.OK);
+            return new ResponseEntity<>(this.questionService.getQuestionsOfQuiz(qId,pageable), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         }

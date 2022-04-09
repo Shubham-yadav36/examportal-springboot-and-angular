@@ -60,7 +60,6 @@ public class AuthenticateController {
     // authencation method
     private void authencate(String username, String password) throws Exception {
         try {
-
             System.out.println(username);
             System.out.println(password);
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -80,7 +79,9 @@ public class AuthenticateController {
     @GetMapping("/current-user")
     public ResponseEntity<?> getCurrentLoggedInUser(Principal principal) {
         try {
-            return ResponseEntity.ok((User) this.detailsService.loadUserByUsername(principal.getName()));
+            User user = (User) this.detailsService.loadUserByUsername(principal.getName());
+            user.setPassword("");
+            return ResponseEntity.ok(user);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

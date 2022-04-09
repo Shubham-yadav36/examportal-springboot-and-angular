@@ -1,19 +1,25 @@
 package com.exam.services.imple;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.exam.dto.PageResponse;
 import com.exam.dto.QuestionDTO;
-import com.exam.dto.QuizDTO;
 import com.exam.model.exam.Question;
 import com.exam.model.exam.Quiz;
 import com.exam.repository.QuestionRepository;
 import com.exam.repository.QuizRepository;
 import com.exam.services.QuestionService;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -61,11 +67,16 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Set<QuestionDTO> getQuestionsOfQuiz(Long quizId) {
+    public PageResponse<Set<QuestionDTO>> getQuestionsOfQuiz(Long quizId,Pageable pageable) {
         Quiz quiz = new Quiz();
         quiz.setqId(quizId);
-        Set<QuestionDTO> questions = this.questionRepository.findByQuiz(quiz).stream().map((question -> mapper.map(question, QuestionDTO.class))).collect(Collectors.toSet());
-        return questions;
+        Page<Question> questions = this.questionRepository.findByQuiz(quiz,pageable);
+        Set<QuestionDTO> questionDTOs=questions.getContent().stream().map((question -> mapper.map(question, QuestionDTO.class))).collect(Collectors.toSet());
+        PageResponse<Set<QuestionDTO>> result = new PageResponse<>();
+        result.setCurrentPage(questions.getNumber());
+        result.setTotalPage(questions.getTotalPages());
+        result.setData(questionDTOs);
+        return result;
     }
 
     @Override

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="results != undefined">
     <h1 class="text-center mt-2">All Available Quizzes</h1>
     <mat-card class="mt-2" *ngFor="let r of results">
         <mat-card-header>
@@ -27,7 +27,19 @@
             <div class="mt-2"><strong>Percentage : </strong>{{((r.correctAnswer/r.quiz.numberOfQuestions).toFixed(4))*100}} %</div>
         </mat-card-content>
     </mat-card>
+
+    <div class="container mt-2" *ngIf="totalPagesSize != 0 ">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item" *ngIf="currentPage!=0" (click)="getResultOfUserById(userId,currentPage-1,size)"><a class="page-link">Previous</a></li>
+
+                <li class="page-item" *ngFor="let in of counter(totalPagesSize) ;let i = index" [ngClass]="[ currentPage==i ? 'active':'']" (click)="getResultOfUserById(userId,i,size)"><a class="page-link">{{i+1}}</a></li>
+
+                <li class="page-item" *ngIf="totalPagesSize!=(currentPage+1)" (click)="getResultOfUserById(userId,currentPage+1,size)"><a class="page-link">Next</a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
-<div class="container-fluid mt-4" *ngIf="results">
+<div class="container-fluid mt-4" *ngIf="results==undefined">
     <h1 class="text-center mt-2">No Quizzes Available</h1>
 </div>

@@ -5,10 +5,14 @@ import java.util.Collections;
 import java.util.Set;
 
 import com.exam.dto.CategoryDTO;
+import com.exam.dto.PageResponse;
 import com.exam.model.exam.Category;
 import com.exam.services.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -58,6 +62,16 @@ public class CategoryController {
             return new ResponseEntity<>(categories, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(Collections.emptySet(), HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<PageResponse<Set<CategoryDTO>>> getAllCategoryWithPagination(Pageable pageable) {
+        try {
+            PageResponse<Set<CategoryDTO>> categories = this.categoryService.findAllCategory(pageable);
+            return new ResponseEntity<>(categories, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new PageResponse<>(), HttpStatus.OK);
         }
     }
 

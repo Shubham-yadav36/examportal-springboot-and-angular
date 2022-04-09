@@ -5,12 +5,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.exam.dto.CategoryDTO;
+import com.exam.dto.PageResponse;
 import com.exam.model.exam.Category;
 import com.exam.repository.CategoryRepository;
 import com.exam.services.CategoryService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -49,6 +52,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(Long categoryId) {
         this.categoryRepository.deleteById(categoryId);
+    }
+
+    @Override
+    public PageResponse<Set<CategoryDTO>> findAllCategory(Pageable pageable) {
+        Page<Category> categories = this.categoryRepository.findAll(pageable);
+        Set<CategoryDTO> categoryDTOS = categories.getContent().stream().map((category -> mapper.map(category, CategoryDTO.class))).collect(Collectors.toSet());
+        PageResponse<Set<CategoryDTO>> result = new PageResponse<>();
+        result.setCurrentPage(categories.getNumber());
+        result.setTotalPage(categories.getTotalPages());
+        result.setData(categoryDTOS);
+        return result;
     }
 
 }

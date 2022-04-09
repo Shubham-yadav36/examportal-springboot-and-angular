@@ -47,9 +47,14 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public Set<QuizDTO> getQuizzes() {
-        Set<QuizDTO> quizDTOS = this.quizRepository.findAll().stream().map((quiz -> mapper.map(quiz, QuizDTO.class))).collect(Collectors.toSet());
-        return quizDTOS;
+    public PageResponse<Set<QuizDTO>> getQuizzes(Pageable pageable) {
+          Page<Quiz> page = this.quizRepository.findAll(pageable);
+         Set<QuizDTO> quizDTOS=	page.getContent().stream().map((quiz -> mapper.map(quiz, QuizDTO.class))).collect(Collectors.toSet());
+        PageResponse<Set<QuizDTO>> result = new PageResponse<>();
+        result.setCurrentPage(page.getNumber());
+        result.setTotalPage(page.getTotalPages());
+        result.setData(quizDTOS);
+         return result;
     }
 
     @Override

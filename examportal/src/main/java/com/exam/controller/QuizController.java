@@ -13,6 +13,7 @@ import com.exam.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -66,11 +67,11 @@ public class QuizController {
 
     // get all quizzes
     @GetMapping("/")
-    public ResponseEntity<Set<QuizDTO>> getAllQuiz() {
+    public ResponseEntity<PageResponse<Set<QuizDTO>>> getAllQuiz(Pageable pageable) {
         try {
-            return new ResponseEntity<>(this.quizService.getQuizzes(), HttpStatus.OK);
+            return new ResponseEntity<>(this.quizService.getQuizzes(pageable), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(Collections.emptySet(), HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
     }
 

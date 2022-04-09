@@ -17,13 +17,14 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private snack: MatSnackBar,
     private login: LoginService
-  ) { }
-  ngOnInit(): void {
-    // for validating fields in this.login
+  ) {
     this.loginForm = new FormGroup({
       username: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(150)]),
       password: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
     });
+  }
+  ngOnInit(): void {
+
   }
   public hasError = (controlName: string, errorName: string) => {
     return this.loginForm.controls[controlName].hasError(errorName);

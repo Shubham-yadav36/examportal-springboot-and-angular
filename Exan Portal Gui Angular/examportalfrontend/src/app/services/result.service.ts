@@ -18,7 +18,7 @@ export class ResultService {
   }
 
   // get all attempted quizzes result by user
-  public getResultByUser(userId){
-    return this.http.get(`${baseUrl}/result/getresults/${userId}`);
+  public getResultByUser(userId,pageNumber,sizeOfPaze){
+    return this.http.get(`${baseUrl}/result/getresults/${userId}`,{params:{page:pageNumber,size:sizeOfPaze}});
   }
 }

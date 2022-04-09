@@ -1,9 +1,9 @@
 <mat-card>
-  <h1>All Categories</h1>
+    <h1>All Categories</h1>
     <mat-list>
         <div class="container text-center">
-          <button routerLink="/admin/add-category" mat-raised-button color="accent">Add New Category</button>
-        <h2 class="mt-4" *ngIf="categories.length == 0">Category is not Available.</h2>
+            <button routerLink="/admin/add-category" mat-raised-button color="accent">Add New Category</button>
+            <h2 class="mt-4" *ngIf="categories.length == 0">Category is not Available.</h2>
         </div>
         <mat-list-item *ngFor="let category of categories">
             <mat-icon mat-list-icon>
@@ -14,4 +14,16 @@
             <mat-divider></mat-divider>
         </mat-list-item>
     </mat-list>
+
 </mat-card>
+<div class="container mt-2" *ngIf="totalPagesSize != 0">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" *ngIf="currentPage!=0" (click)="getCategories(currentPage-1,size)"><a class="page-link">Previous</a></li>
+
+            <li class="page-item" *ngFor="let in of counter(totalPagesSize) ;let i = index" [ngClass]="[ currentPage==i ? 'active':'']" (click)="getCategories(i,size)"><a class="page-link">{{i+1}}</a></li>
+
+            <li class="page-item" *ngIf="totalPagesSize!=(currentPage+1)" (click)="getCategories(currentPage+1,size)"><a class="page-link">Next</a></li>
+        </ul>
+    </nav>
+</div>

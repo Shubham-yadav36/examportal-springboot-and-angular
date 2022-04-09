@@ -15,7 +15,7 @@ public interface QuizService {
 
     public QuizDTO updateQuiz(QuizDTO quizDTO);
 
-    public Set<QuizDTO> getQuizzes();
+    public PageResponse<Set<QuizDTO>> getQuizzes(Pageable pageable);
 
     public void deleteQuiz(Long quizId);
 

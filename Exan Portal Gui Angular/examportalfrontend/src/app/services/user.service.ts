@@ -20,8 +20,8 @@ export class UserService {
     return this.http.put(`${baseUrl}/user/`, user);
   }
 
-  public allUser() {
-    return this.http.get(`${baseUrl}/user/all`);
+  public allUser(currentPage) {
+    return this.http.get(`${baseUrl}/user/all/${currentPage}`);
   }
 
   public deleteUser(id) {

@@ -10,20 +10,33 @@ import Swal from 'sweetalert2';
 export class ViewCategoriesComponent implements OnInit {
 
   categories = [];
-
+  currentPage = 0;
+  totalPagesSize = 0;
+  size = 5;
   constructor(private categoryService: CategoryServiceService) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe(
-      (data:any) =>{
-        this.categories = data;
+    this.getCategories(this.currentPage, this.size);
+  }
+
+  getCategories(page, size) {
+    this.categoryService.getCategoriesPage(page, size).subscribe(
+      (data: any) => {
+        this.categories = data.data;
+        this.currentPage = data.currentPage;
+        this.totalPagesSize = data.totalPage;
+        console.log(data)
+        console.log(this.currentPage + " "+this.totalPagesSize)
       },
-      (err) =>{
-        Swal.fire("Error !!","Error When loading !",'error');
+      (err) => {
+        Swal.fire("Error !!", "Error When loading !", 'error');
 
       }
     );
+
   }
-
-
+   // to get number to object
+   counter(i: number) {
+    return new Array(i);
+  }
 }

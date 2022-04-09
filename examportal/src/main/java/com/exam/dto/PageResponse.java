@@ -5,6 +5,7 @@ import java.util.List;
 public class PageResponse<T> {
     private T data;
     private Integer totalPage;
+    private Integer currentPage;
 
     public PageResponse() {
     }
@@ -12,6 +13,14 @@ public class PageResponse<T> {
     public PageResponse(T data, Integer totalPage) {
         this.data = data;
         this.totalPage = totalPage;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
     }
 
     public T getData() {

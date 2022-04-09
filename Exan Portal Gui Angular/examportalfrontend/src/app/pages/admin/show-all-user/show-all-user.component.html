@@ -1,4 +1,7 @@
 <!-- Cards with media area -->
+<div class="container-fluid mt-4" *ngIf="allUser==undefined">
+    <h1 class="text-center mt-2">No User Available</h1>
+</div>
 <mat-card class="example-card mt-2" *ngFor="let user of allUser">
     <mat-card-title-group>
         <mat-card-title>Name : {{user.fistName + user.lastName}}</mat-card-title>
@@ -12,3 +15,14 @@
         <!-- <button (click)="deleteUser(user.id)" class="mx-2" mat-flat-button color="warn">Delete User</button> -->
     </mat-card-content>
 </mat-card>
+<div class="container mt-4" *ngIf="totalPagesSize != 0">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" *ngIf="currentPage!=1" (click)="showAllUser(currentPage-1)"><a class="page-link">Previous</a></li>
+
+            <li class="page-item" *ngFor="let in of counter(totalPagesSize) ;let i = index" [ngClass]="[ currentPage==i+1 ? 'active':'']" (click)="showAllUser(i+1)"><a class="page-link">{{i+1}}</a></li>
+
+            <li class="page-item" *ngIf="totalPagesSize!=currentPage" (click)="showAllUser(currentPage+1)"><a class="page-link">Next</a></li>
+        </ul>
+    </nav>
+</div>

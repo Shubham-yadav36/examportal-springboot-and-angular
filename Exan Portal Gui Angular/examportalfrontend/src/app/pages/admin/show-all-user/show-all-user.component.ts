@@ -14,17 +14,32 @@ export class ShowAllUserComponent implements OnInit {
     private userService: UserService
   ) {}
 
+  totalPagesSize = 1;
+  currentPage = 1;
   allUser;
   ngOnInit(): void {
-    this.userService.allUser().subscribe(
-      (data) => {
-        this.allUser = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.showAllUser(this.currentPage);
   }
+
+    // to get number to object
+    counter(i: number) {
+      return new Array(i);
+    }
+
+    showAllUser(page){
+      this.userService.allUser(page).subscribe(
+        (data) => {
+          console.log(data)
+          this.currentPage = data[1];
+          this.allUser = data[0];
+          this.totalPagesSize = data[2]
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+
 
   deleteUser(id) {
     Swal.fire({

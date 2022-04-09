@@ -2,8 +2,9 @@ package com.exam.services;
 
 import java.util.List;
 
+import com.exam.dto.PageResponse;
 import com.exam.dto.UserDTO;
-import com.exam.model.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
@@ -19,5 +20,5 @@ public interface UserService {
 
     public String updateProfile(Long id, MultipartFile file);
 
-    public List<UserDTO> getAllUser();
+    public PageResponse<List<UserDTO>> getAllUser(Pageable pageable);
 }

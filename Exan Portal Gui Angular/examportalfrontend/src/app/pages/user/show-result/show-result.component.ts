@@ -11,22 +11,34 @@ import Swal from 'sweetalert2';
 export class ShowResultComponent implements OnInit {
 
   userId;
-  results= [];
-  constructor(private activatedRoute:ActivatedRoute,private resultService:ResultService,private router:Router) { }
+  results = [];
+  currentPage = 0;
+  totalPagesSize;
+  size = 2;
+  constructor(private activatedRoute: ActivatedRoute, private resultService: ResultService, private router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.params.userId;
-    this.resultService.getResultByUser(this.userId).subscribe(
-      (data:any) =>{
-        this.results = data;
+    this.getResultByUserId(this.userId, this.currentPage, this.size)
+  }
+  getResultByUserId(userId, page, size) {
+    this.resultService.getResultByUser(userId, page, size).subscribe(
+      (data: any) => {
+        this.results = data.data;
+        this.currentPage = data.currentPage;
+        this.totalPagesSize = data.totalPage;
+        console.log(data)
       },
-      (err:any) =>{
-        Swal.fire("Error !!","Error While Loading Results",'error')
+      (err: any) => {
+        Swal.fire("Error !!", "Error While Loading Results", 'error')
       }
     );
   }
-  generateResult(resultId){
-    this.router.navigate(['/generate-certificate/'+resultId]);
+  generateResult(resultId) {
+    this.router.navigate(['/generate-certificate/' + resultId]);
   }
-
+  // to get number to object
+  counter(i: number) {
+    return new Array(i);
+  }
 }

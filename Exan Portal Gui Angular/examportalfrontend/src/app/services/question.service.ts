@@ -10,8 +10,8 @@ export class QuestionService {
   constructor(private http:HttpClient) { }
 
   // for admin
-  getAllQuestionOfQuiz(qId){
-    return this.http.get(`${baseUrl}/question/quiz/all/${qId}`)
+  getAllQuestionOfQuiz(qId,pageNumber,sizeOfPage){
+    return this.http.get(`${baseUrl}/question/quiz/all/${qId}`,{params:{page:pageNumber,size:'2'}})
   }
 
   // for normal user

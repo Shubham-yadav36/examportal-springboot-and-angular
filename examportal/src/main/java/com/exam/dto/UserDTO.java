@@ -13,7 +13,6 @@ import java.util.Set;
 public class UserDTO implements Serializable {
     private Long id;
     private String username;
-    @JsonIgnore
     private String password;
     private String fistName;
     private String lastName;

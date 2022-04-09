@@ -9,22 +9,34 @@ import Swal from 'sweetalert2';
 })
 export class ViewQuizzesComponent implements OnInit {
 
-  constructor(private quizService:QuizService) { }
+  constructor(private quizService: QuizService) { }
 
-  quizzes=[];
-
+  quizzes = [];
+  currentPage = 0;
+  totalPagesSize = 0;
+  size = 3;
   ngOnInit(): void {
-    this.quizService.getAllQuizzes().subscribe(
-      (data:any) => {
-        this.quizzes = data;
+   this.getAllQuizzes(this.currentPage,this.size);
+  }
+
+  getAllQuizzes(page,size){
+    this.quizService.getAllQuizzes(page,size).subscribe(
+      (data: any) => {
+        this.quizzes = data.data;
+        this.currentPage = data.currentPage;
+        this.totalPagesSize = data.totalPage
       },
       (err) => {
-        Swal.fire('Error !!',"Quiz loading failed !",'error')
+        Swal.fire('Error !!', "Quiz loading failed !", 'error')
       }
     )
   }
+    // to get number to object
+    counter(i: number) {
+      return new Array(i);
+    }
 
-  deleteQuiz(qId){
+  deleteQuiz(qId) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

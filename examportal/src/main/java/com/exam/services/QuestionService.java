@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.data.domain.Pageable;
+
+import com.exam.dto.PageResponse;
 import com.exam.dto.QuestionDTO;
 import com.exam.model.exam.Question;
 import com.exam.model.exam.Quiz;
@@ -19,7 +22,7 @@ public interface QuestionService {
 
     public void deleteQuestion(Long questionId);
 
-    public Set<QuestionDTO> getQuestionsOfQuiz(Long quizId);
+    public PageResponse<Set<QuestionDTO>> getQuestionsOfQuiz(Long quizId, Pageable pageable);
 
     public QuestionDTO getQuestionById(Long questionId);
 

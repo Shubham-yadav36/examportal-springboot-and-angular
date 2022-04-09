@@ -1,11 +1,14 @@
 package com.exam.controller;
 
+import com.exam.dto.PageResponse;
 import com.exam.dto.UserDTO;
 import com.exam.model.User;
 import com.exam.services.UserService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,6 +47,7 @@ public class UserController {
         try {
             return new ResponseEntity<UserDTO>(this.userService.createUser(userDTO), HttpStatus.CREATED);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<String>("Already Exists", HttpStatus.BAD_GATEWAY);
         }
     }
@@ -68,10 +72,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<UserDTO>> getAllUser() {
-        List<UserDTO> listUser = this.userService.getAllUser();
-        return new ResponseEntity<>(listUser, HttpStatus.OK);
+    @GetMapping("/all/{pageId}")
+    public ResponseEntity<List> getAllUser(@PathVariable("pageId") Integer pageId) {
+        PageRequest pageable = PageRequest.of(pageId - 1, 2);
+        PageResponse<List<UserDTO>> listUser = this.userService.getAllUser(pageable);
+        return new ResponseEntity<>(List.of(listUser.getData(), pageId, listUser.getTotalPage()), HttpStatus.OK);
     }
 
     @PutMapping("/")
@@ -95,6 +100,5 @@ public class UserController {
             return new ResponseEntity<String>("Not Uploaded", HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
-
     }
 }

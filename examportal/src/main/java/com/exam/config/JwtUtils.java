@@ -54,6 +54,11 @@ public class JwtUtils {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
+    public String getCustomerIdFromToken(String token){
+        return Jwts.parser().setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token).getBody().getSubject();
+    }
+
     public String extractUsername(Enumeration<String> headers) {
         return null;
     }

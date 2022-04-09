@@ -1,8 +1,8 @@
-<div class="container text-center my-2" >
-  <button routerLink="/admin/add-quiz" mat-raised-button color="accent">Add New Quiz</button>
-  <h2 class="mt-4" *ngIf="quizzes.length == 0">No Quiz Available.</h2>
+<div class="container text-center my-2">
+    <button routerLink="/admin/add-quiz" mat-raised-button color="accent">Add New Quiz</button>
+    <h2 class="mt-4" *ngIf="quizzes.length == 0">No Quiz Available.</h2>
 
-  </div>
+</div>
 <mat-card class="mt-10" *ngFor="let q of quizzes">
     <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
@@ -18,3 +18,14 @@
         <button (click)="deleteQuiz(q.qId)" mat-raised-button color="warn">Delete</button>
     </mat-card-actions>
 </mat-card>
+<div class="container mt-4" *ngIf="totalPagesSize != 0">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" *ngIf="currentPage!=0" (click)="getAllQuizzes(currentPage-1,size)"><a class="page-link">Previous</a></li>
+
+            <li class="page-item" *ngFor="let in of counter(totalPagesSize) ;let i = index" [ngClass]="[ currentPage==i ? 'active':'']" (click)="getAllQuizzes(i,size)"><a class="page-link">{{i+1}}</a></li>
+
+            <li class="page-item" *ngIf="totalPagesSize!=(currentPage+1)" (click)="getAllQuizzes(currentPage+1,size)"><a class="page-link">Next</a></li>
+        </ul>
+    </nav>
+</div>

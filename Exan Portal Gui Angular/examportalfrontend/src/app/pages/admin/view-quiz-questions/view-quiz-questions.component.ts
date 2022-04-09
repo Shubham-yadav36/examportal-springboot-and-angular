@@ -13,6 +13,9 @@ export class ViewQuizQuestionsComponent implements OnInit {
   qId;
   qTitle;
   questions = [];
+  currentPage = 0;
+  totalPagesSize = 0;
+  size = 2;
   constructor(
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
@@ -22,10 +25,15 @@ export class ViewQuizQuestionsComponent implements OnInit {
   ngOnInit(): void {
     this.qId = this.activatedRoute.snapshot.params.qId;
     this.qTitle = this.activatedRoute.snapshot.params.title;
+    this.getAllQuestion(this.qId,this.currentPage,this.size)
 
-    this.questionService.getAllQuestionOfQuiz(this.qId).subscribe(
+  }
+  getAllQuestion(qId,currentPage,size){
+    this.questionService.getAllQuestionOfQuiz(qId,currentPage,size).subscribe(
       (data: any) => {
-        this.questions = data;
+        this.questions = data.data;
+        this.currentPage = data.currentPage;
+        this.totalPagesSize= data.totalPage        ;
       },
       (err: any) => {
         Swal.fire('Error !!', 'Error when load Questions', 'error');
@@ -51,7 +59,19 @@ export class ViewQuizQuestionsComponent implements OnInit {
       }
     );
   }
+   // to get number to object
+   counter(i: number) {
+    return new Array(i);
+  }
 }
 function result(result: any) {
   throw new Error('Function not implemented.');
 }
+function page(qId: any, page: any, size: any) {
+  throw new Error('Function not implemented.');
+}
+
+function size(qId: any, page: (qId: any, page: any, size: any) => void, size: any) {
+  throw new Error('Function not implemented.');
+}
+

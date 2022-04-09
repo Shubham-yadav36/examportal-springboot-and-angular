@@ -13,8 +13,8 @@ export class QuizService {
     return this.http.post(`${baseUrl}/quiz/`,quiz)
   }
 
-  public getAllQuizzes(){
-    return this.http.get(`${baseUrl}/quiz/`)
+  public getAllQuizzes(pageNumber,sizeOfPage){
+    return this.http.get(`${baseUrl}/quiz/`,{params:{page:pageNumber,size:sizeOfPage}})
   }
 
   public deleteQuiz(quizId){

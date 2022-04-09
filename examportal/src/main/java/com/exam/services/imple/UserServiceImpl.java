@@ -1,17 +1,15 @@
 package com.exam.services.imple;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import com.exam.dto.PageResponse;
+import com.exam.dto.QuizDTO;
 import com.exam.model.Role;
 import com.exam.model.User;
 import com.exam.model.UserRole;
@@ -21,6 +19,8 @@ import com.exam.services.UserService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
         } else {
             userDTO.setProfile("signup.png");
             // encription of password
+
             userDTO.setPassword(this.bCryptPasswordEncoder.encode(userDTO.getPassword()));
 
             Set<UserRole> roles = new HashSet<>();
@@ -75,6 +76,7 @@ public class UserServiceImpl implements UserService {
             user.getUserRoles().addAll(roles);
             local = this.userRepository.save(user);
             this.userRepository.flush();
+            local.setPassword("");
         }
         return mapper.map(local, UserDTO.class);
     }
@@ -82,6 +84,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getUser(String username) {
         User user = this.userRepository.findByUsername(username);
+        user.setPassword("");
         return mapper.map(user, UserDTO.class);
     }
 
@@ -108,7 +111,7 @@ public class UserServiceImpl implements UserService {
         local.setFistName(userDTO.getFistName());
         local.setLastName(userDTO.getLastName());
         local.setPhone(userDTO.getPhone());
-        this.userRepository.save(mapper.map(userDTO, User.class));
+        this.userRepository.save(local);
         this.userRepository.flush();
 
     }
@@ -132,12 +135,13 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             throw new RuntimeException("Not Uploaded");
         }
-
     }
 
     @Override
-    public List<UserDTO> getAllUser() {
-        return this.userRepository.getAllUser().stream().map(this::toEntity).collect(Collectors.toList());
+    public PageResponse<List<UserDTO>> getAllUser(Pageable pageable) {
+        Page<User> pages = this.userRepository.findAllByOrderByFistNameAsc(pageable);
+        List<UserDTO> userDTOS = pages.getContent().stream().map(this::toEntity).collect(Collectors.toList());
+        return new PageResponse<>(userDTOS, pages.getTotalPages());
     }
 
     public UserDTO toEntity(User user) {
